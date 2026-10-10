@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differential Equation Numerical Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">NUMERICAL ANALYSIS LAB</p>
+            <h1>Differential Equation Solver</h1>
+            <p class="subtitle">Explore, solve and compare numerical methods for
+                first-order initial-value problems.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>1. Problem definition</h2>
+            <p class="hint">Enter an initial-value problem of the form
+                <strong>dy/dx = f(x, y)</strong>.</p>
+
+            <form id="solverForm">
+                <label for="equation">Differential equation: dy/dx =</label>
+                <input id="equation" value="x + y" maxlength="160" required
+                       placeholder="Example: x + y">
+
+                <div class="grid">
+                    <div>
+                        <label for="x0">Initial x (x₀)</label>
+                        <input id="x0" type="number" value="0" step="any" required>
+                    </div>
+                    <div>
+                        <label for="y0">Initial y (y₀)</label>
+                        <input id="y0" type="number" value="1" step="any" required>
+                    </div>
+                    <div>
+                        <label for="h">Step size (h)</label>
+                        <input id="h" type="number" value="0.1"
+                               min="0.000001" step="any" required>
+                    </div>
+                    <div>
+                        <label for="end">End x</label>
+                        <input id="end" type="number" value="1" step="any" required>
+                    </div>
+                </div>
+
+                <label for="method">Select numerical method</label>
+                <select id="method">
+                    <option value="all">Compare all methods</option>
+                    <option value="euler">1. Euler's Method</option>
+                    <option value="heun">2. Improved Euler (Heun)</option>
+                    <option value="midpoint">3. Midpoint Method (RK2)</option>
+                    <option value="rk3">4. Runge-Kutta 3rd Order (RK3)</option>
+                    <option value="rk4">5. Runge-Kutta 4th Order (RK4)</option>
+                    <option value="ralston">6. Ralston's Method (RK2)</option>
+                    <option value="taylor">7. Taylor Series (order 4)</option>
+                    <option value="ab4">8. Adams-Bashforth (4-step)</option>
+                    <option value="am4">9. Adams-Moulton (4-step)</option>
+                    <option value="backward">10. Backward Euler</option>
+                    <option value="trapezoidal">11. Trapezoidal (implicit)</option>
+                    <option value="exact">12. Exact Analytical Solution</option>
+                    <option value="scipy">13. SciPy solve_ivp (RK45)</option>
+                </select>
+
+                <button id="solveButton" type="submit">Solve Equation</button>
+                <button id="downloadButton" type="button" class="secondary"
+                        disabled>Download Results CSV</button>
+            </form>
+
+            <p id="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="summary" class="summary-grid" hidden></section>
+
+        <section id="graphCard" class="card" hidden>
+            <h2>2. Numerical solution graph</h2>
+            <p class="hint">Compare the calculated solutions and exact solution, when available.</p>
+            <div class="chart-wrap">
+                <canvas id="solutionChart"></canvas>
+            </div>
+        </section>
+
+        <section id="errorCard" class="card" hidden>
+            <h2>3. Error comparison</h2>
+            <p class="hint">Errors are calculated only when an exact solution is available.</p>
+            <div id="errorTable" class="table-wrap"></div>
+        </section>
+
+        <section id="resultsCard" class="card" hidden>
+            <h2>4. Numerical results</h2>
+            <p id="resultDescription" class="hint"></p>
+            <div id="resultsTables"></div>
+        </section>
+
+        <footer>
+            Educational tool for first-order ordinary differential equations.
+            Always verify results before using them in academic work.
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
