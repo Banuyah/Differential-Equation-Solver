@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 
 Flask
 numpy
 scipy
 sympy
+=======
+
+Flask
+numpy
+scipy
+sympy
+gunicorn
+>>>>>>> 0dd33159f5113dce5704c711927402897e4eab52
