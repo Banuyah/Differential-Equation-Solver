@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 from flask import Flask, render_template, request, jsonify
 import math
@@ -1426,4 +1425,3 @@ def solve():
 
 if __name__ == "__main__":
     app.run(debug=True)
->>>>>>> 0dd33159f5113dce5704c711927402897e4eab52
